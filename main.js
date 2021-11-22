@@ -1,4 +1,7 @@
+noseX=0;
+noseY=0
 function preload(){
+    mustache = loadImage('https://i.postimg.cc/tTVpcc8S/m.png')
 }
 function setup(){
     canvas = createCanvas(300, 300);
@@ -15,13 +18,16 @@ function modelLoaded(){
 }
 function gotPoses(results){
     if(results.length > 0){
+        noseX = results[0].pose.nose.x;
+        noseY = results[0].pose.nose.y;
         console.log(results);
-        console.log("nose x = " + results[0].pose.nose.x);
-        console.log("nose y = " + results[0].pose.nose.y);
+        console.log("nose x = " + noseX);
+        console.log("nose y = " + noseY);
     }
 }
 function draw(){
     image(video, 0, 0, 300, 300);
+    image(mustache, noseX, noseY, 30, 30);
 }
 function take_snapshot(){
     save('Real_time_filter.png');
